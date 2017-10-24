@@ -5,23 +5,25 @@ class Play < Board
   include Game_board
 
 
-  def play_game
+  def play_game(&bloc)
     load_random
     pic
     puts "Please, choose number between 0 and 5"
-    print "\u23F0"
-    print "\u0020"
-    print "\u0020"
-    print "\u0020"
-    print "\u23F0"
-    print "\u0020"
-    print "\u0020"
-    print "\u0020"
-    print "\u23F0"
-    puts
+    yield
     game
   end
 end
 
  a = Play.new
- a.play_game
+ a.play_game do
+   print "\u23F0"
+   print "\u0020"
+   print "\u0020"
+   print "\u0020"
+   print "\u23F0"
+   print "\u0020"
+   print "\u0020"
+   print "\u0020"
+   print "\u23F0"
+   puts
+ end
