@@ -1,4 +1,4 @@
-module Game_board
+module AsciDrawer
 
   def draw_cells
     puts

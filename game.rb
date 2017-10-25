@@ -1,7 +1,7 @@
-require './game_board'
+require './asci_drawer'
 
 class Game
-  include Game_board
+  include AsciDrawer
 
   attr_accessor :board
 
