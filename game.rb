@@ -1,9 +1,7 @@
-require './asci_drawer'
-require './unicode_drawer'
+require_relative 'drawers/asci_drawer'
+require_relative 'drawers/unicode_drawer'
 
 class Game
-  include AsciDrawer
-  include Unicode_drawer
 
   attr_accessor :board
 
@@ -20,14 +18,30 @@ class Game
 
   private
 
-  def choose_game_looks
-  puts "You can choose game's looks: 1 or 2"
-  game_looks = gets.to_i
-  if game_looks == 1
-    draw_cells
-  else
-    draw_box
+  def available_drawers
+    [
+      AsciDrawer,
+      UnicodeDrawer
+    ]
   end
+
+  def print_drawer_options
+    available_drawers.each_with_index do |drawer, i|
+      puts "To select #{drawer.name} - press #{i}"
+    end
+  end
+
+  def include_drawer(drawer_index)
+    drawer = available_drawers[drawer_index]
+    self.class.include drawer
+  end
+
+  def choose_game_looks
+    puts "You can choose game's look"
+    print_drawer_options
+    drawer_index = gets.to_i
+    include_drawer(drawer_index)
+    draw_cells
   end
 
 
