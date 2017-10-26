@@ -1,7 +1,9 @@
 require './asci_drawer'
+require './unicode_drawer'
 
 class Game
   include AsciDrawer
+  include Unicode_drawer
 
   attr_accessor :board
 
@@ -10,13 +12,24 @@ class Game
   end
 
   def play(&bloc)
-    draw_cells
+    choose_game_looks
     puts "Please, choose number between 0 and 5"
     yield
     raffle
   end
 
   private
+
+  def choose_game_looks
+  puts "You can choose game's looks: 1 or 2"
+  game_looks = gets.to_i
+  if game_looks == 1
+    draw_cells
+  else
+    draw_box
+  end
+  end
+
 
   def raffle
     position = gets.to_i
