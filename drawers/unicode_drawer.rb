@@ -1,11 +1,11 @@
-module Unicode_drawer
+module UnicodeDrawer
 
-  def draw_box
+  def draw_cells
 
     for i in 1..8
-    print "\u2E0F"
-  end
-  puts
+      print "\u2E0F"
+    end
+    puts
     print "\u2045"
     print 0
     print "\u2046"
@@ -27,9 +27,9 @@ module Unicode_drawer
     print "\u2046"
     puts
     for a in 1..9
-    print "\u203E"
-  end
-      puts
+      print "\u203E"
+    end
+    puts
 
-end
+  end
 end
