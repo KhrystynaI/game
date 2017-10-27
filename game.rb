@@ -23,7 +23,7 @@ class Game
   private
 
   def load_drawers
-    files = Dir['./drawers/*.rb']
+    files = Dir['./drawers/*_drawer.rb']
 
     files.each {|file| require file}
 
