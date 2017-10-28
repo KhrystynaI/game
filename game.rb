@@ -1,5 +1,5 @@
-require_relative 'drawers/asci_drawer'
-require_relative 'drawers/unicode_drawer'
+require 'active_support/inflector'
+#require 'active_support/core_ext/string'
 
 class Game
 
@@ -16,23 +16,31 @@ class Game
     raffle
   end
 
+  def drawers
+    @drawers ||= load_drawers
+  end
+
   private
 
-  def available_drawers
-    [
-      AsciDrawer,
-      UnicodeDrawer
-    ]
+  def load_drawers
+    files = Dir['./drawers/*_drawer.rb']
+
+    files.each {|file| require file}
+
+    files.map do |file|
+      drawer_class_name = ActiveSupport::Inflector.camelize(File.basename(file, '.rb'))
+      drawer_class_name.constantize
+    end
   end
 
   def print_drawer_options
-    available_drawers.each_with_index do |drawer, i|
+    drawers.each_with_index do |drawer, i|
       puts "To select #{drawer.name} - press #{i}"
     end
   end
 
   def include_drawer(drawer_index)
-    drawer = available_drawers[drawer_index]
+    drawer = drawers[drawer_index]
     self.class.include drawer
   end
 
