@@ -16,5 +16,3 @@ end
 
 
 
-#task :test do
- #FileList['./*drawer_spec.rb']
