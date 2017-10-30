@@ -13,8 +13,3 @@ begin
    end
   task :default => :spec
 end
-
-
-
-#task :test do
- #FileList['./*drawer_spec.rb']
